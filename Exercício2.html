@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Alteração de texto</title>
+</head>
+<body>
+
+    <h1 id="titulo">Título original</h1>
+
+    <p id="paragrafo">Este é o texto original.</p>
+
+    <button id="botao" onclick="alterarTexto()">Alterar texto</button>
+
+    <script>
+        function alterarTexto() {
+            document.getElementById("titulo").innerHTML = "Título alterado!";
+
+            document.getElementById("paragrafo").innerHTML =
+            "Texto modificado.";
+
+            document.getElementById("botao").innerHTML = "Texto alterado!";
+        }
+    </script>
+
+</body>
+</html>
