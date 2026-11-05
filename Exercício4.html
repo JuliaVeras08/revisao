@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de nomes</title>
+</head>
+<body>
+
+    <h1>Lista de nomes</h1>
+
+    <input type="text" id="nome" placeholder="Digite um nome">
+
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        function adicionar() {
+            let nome = document.getElementById("nome").value;
+
+            if (nome.trim() == "") {
+                alert("Digite um nome!");
+            }
+            else {
+                let item = document.createElement("li");
+
+                item.innerHTML = nome;
+
+                document.getElementById("lista").appendChild(item);
+
+                document.getElementById("nome").value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
