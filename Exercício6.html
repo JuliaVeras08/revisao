@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de contatos</title>
+</head>
+<body>
+
+    <h1>Cadastro de contatos</h1>
+
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="telefone" placeholder="Telefone">
+    <input type="email" id="email" placeholder="E-mail">
+
+    <button onclick="cadastrar()">Cadastrar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+        function cadastrar() {
+            let nome = document.getElementById("nome").value;
+            let telefone = document.getElementById("telefone").value;
+            let email = document.getElementById("email").value;
+
+            if (nome.trim() == "" || telefone.trim() == "" || email.trim() == "") {
+                alert("Preencha todos os campos!");
+            }
+            else {
+                let contato = document.createElement("li");
+
+                contato.innerHTML = "Nome: " + nome +
+                " | Telefone: " + telefone +
+                " | E-mail: " + email + " ";
+
+                let excluir = document.createElement("button");
+                excluir.innerHTML = "Excluir";
+
+                excluir.onclick = function() {
+                    contato.remove();
+                };
+
+                contato.appendChild(excluir);
+
+                document.getElementById("lista").appendChild(contato);
+
+                document.getElementById("nome").value = "";
+                document.getElementById("telefone").value = "";
+                document.getElementById("email").value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>

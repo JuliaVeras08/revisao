@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de notas</title>
+</head>
+<body>
+
+    <h1>Controle de notas</h1>
+
+    <input type="text" id="nome" placeholder="Nome do aluno">
+
+    <input type="number" id="nota" placeholder="Nota">
+
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <h3 id="media">Média: 0</h3>
+
+    <script>
+        let notas = [];
+
+        function adicionar() {
+            let nome = document.getElementById("nome").value;
+            let nota = document.getElementById("nota").value;
+
+            if (nome.trim() == "" || nota == "") {
+                alert("Preencha todos os campos!");
+            }
+            else if (Number(nota) < 0 || Number(nota) > 10) {
+                alert("Digite uma nota entre 0 e 10!");
+            }
+            else {
+                notas.push(Number(nota));
+
+                let item = document.createElement("li");
+
+                let situacao = Number(nota) >= 6 ? "Aprovado" : "Reprovado";
+
+                item.innerHTML = nome + " - Nota: " + nota +
+                " - " + situacao + " ";
+
+                let excluir = document.createElement("button");
+                excluir.innerHTML = "Excluir";
+
+                excluir.onclick = function() {
+                    let posicao = Array.from(
+                        document.getElementById("lista").children
+                    ).indexOf(item);
+
+                    notas.splice(posicao, 1);
+                    item.remove();
+                    calcularMedia();
+                };
+
+                item.appendChild(excluir);
+
+                document.getElementById("lista").appendChild(item);
+
+                document.getElementById("nome").value = "";
+                document.getElementById("nota").value = "";
+
+                calcularMedia();
+            }
+        }
+
+        function calcularMedia() {
+            let soma = 0;
+
+            for (let i = 0; i < notas.length; i++) {
+                soma += notas[i];
+            }
+
+            let media = notas.length > 0 ? soma / notas.length : 0;
+
+            document.getElementById("media").innerHTML =
+            "Média: " + media.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

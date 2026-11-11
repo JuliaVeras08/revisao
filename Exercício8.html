@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Galeria de imagens</title>
+</head>
+<body>
+
+    <h1>Galeria de imagens</h1>
+
+    <button onclick="mostrar('imagem1.jpg', 'Paisagem')">
+        Imagem 1
+    </button>
+
+    <button onclick="mostrar('imagem2.jpg', 'Praia')">
+        Imagem 2
+    </button>
+
+    <button onclick="mostrar('imagem3.jpg', 'Natureza')">
+        Imagem 3
+    </button>
+
+    <h2 id="nome">Selecione uma imagem</h2>
+
+    <img id="imagem" src="" width="400">
+
+    <script>
+        function mostrar(arquivo, nome) {
+            document.getElementById("imagem").src = arquivo;
+
+            document.getElementById("nome").innerHTML = nome;
+        }
+    </script>
+
+</body>
+</html>

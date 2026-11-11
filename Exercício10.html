@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de tarefas</title>
+</head>
+<body>
+
+    <h1>Gerenciador de tarefas</h1>
+
+    <input type="text" id="descricao" placeholder="Digite uma tarefa">
+
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <h3 id="total">Total de tarefas: 0</h3>
+    <h3 id="concluidas">Concluídas: 0</h3>
+    <h3 id="pendentes">Pendentes: 0</h3>
+
+    <script>
+        let tarefas = [];
+
+        function adicionar() {
+            let descricao = document.getElementById("descricao").value;
+
+            if (descricao.trim() == "") {
+                alert("Digite uma tarefa!");
+            }
+            else {
+                let tarefa = {
+                    descricao: descricao,
+                    concluida: false
+                };
+
+                tarefas.push(tarefa);
+
+                document.getElementById("descricao").value = "";
+
+                atualizarLista();
+            }
+        }
+
+        function atualizarLista() {
+            let lista = document.getElementById("lista");
+
+            lista.innerHTML = "";
+
+            let concluidas = 0;
+
+            tarefas.forEach(function(tarefa, indice) {
+                let item = document.createElement("li");
+
+                item.innerHTML = tarefa.descricao;
+
+                if (tarefa.concluida) {
+                    item.style.color = "green";
+                    item.style.textDecoration = "line-through";
+                    concluidas++;
+                }
+
+                let concluir = document.createElement("button");
+
+                concluir.innerHTML = "Concluir";
+
+                concluir.onclick = function() {
+                    tarefa.concluida = true;
+                    atualizarLista();
+                };
+
+                let excluir = document.createElement("button");
+
+                excluir.innerHTML = "Excluir";
+
+                excluir.onclick = function() {
+                    tarefas.splice(indice, 1);
+                    atualizarLista();
+                };
+
+                item.appendChild(concluir);
+                item.appendChild(excluir);
+
+                lista.appendChild(item);
+            });
+
+            document.getElementById("total").innerHTML =
+            "Total de tarefas: " + tarefas.length;
+
+            document.getElementById("concluidas").innerHTML =
+            "Concluídas: " + concluidas;
+
+            document.getElementById("pendentes").innerHTML =
+            "Pendentes: " + (tarefas.length - concluidas);
+        }
+    </script>
+
+</body>
+</html>
